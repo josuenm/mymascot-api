@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  mysql:
+    container_name: mysql_db
+    image: mysql:5.7
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    container_name: app
+    env_file:
+      - .env
+    build:
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - ${PORT}:${PORT}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  mysql-data:

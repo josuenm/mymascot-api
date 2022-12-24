@@ -19,7 +19,7 @@ route.post(
   createProductController
 );
 route.put(
-  "/update/:id",
+  "/edit/:id",
   authCud,
   multer(multerConfig).array("files", 10),
   renameAllFiles,

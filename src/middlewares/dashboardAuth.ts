@@ -35,7 +35,7 @@ export const authCud = async (
     }
 
     if (!user.rules.cud) {
-      return res.json({ rule: "Partial access" });
+      return res.status(401).json({ error: "Permission denied" });
     }
 
     return next();
@@ -73,7 +73,7 @@ export const authRead = async (
     }
 
     if (!user.rules.read) {
-      return res.json({ rule: "Partial access" });
+      return res.json({ error: "Partial access" });
     }
 
     return next();

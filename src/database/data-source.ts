@@ -9,7 +9,7 @@ import { User } from "../entities/User";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
-  host: process.env.DB_HOST,
+  host: process.env.MYSQLHOST,
   port: Number(process.env.MYSQLPORT),
   username: process.env.MYSQLUSER,
   password: process.env.MYSQLPASSWORD,

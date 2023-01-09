@@ -28,6 +28,8 @@ export const dashboardSignUpController = async (
       return res.status(409).json({ error: "User aldready exists" });
     }
 
+    console.log({ userAlreadyExists });
+
     const hashedPassword = await bcrypt.hash(password, 8);
 
     const user = repo.create({

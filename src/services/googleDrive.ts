@@ -1,5 +1,4 @@
 import { google } from "googleapis";
-import path from "path";
 import stream from "stream";
 
 const GOOGLE_API_FOLDER_ID = "1e94Ch1uk3ZkWybR0n8CuYCiUjarDQoAN";
@@ -7,7 +6,10 @@ const GOOGLE_API_FOLDER_ID = "1e94Ch1uk3ZkWybR0n8CuYCiUjarDQoAN";
 export async function uploadFile(file: Express.Multer.File) {
   try {
     const auth = new google.auth.GoogleAuth({
-      keyFile: path.join(__dirname, "..", "config", "googledrive.json"),
+      credentials: {
+        private_key: process.env.GOOGLE_DRIVE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+        client_email: process.env.GOOGLE_DRIVE_CLIENT_EMAIL,
+      },
       scopes: "https://www.googleapis.com/auth/drive",
     });
 

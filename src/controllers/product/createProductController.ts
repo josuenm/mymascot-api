@@ -41,6 +41,8 @@ export const createProductController = async (req: Request, res: Response) => {
 
     let picturesUrl = [];
 
+    console.log(req.files.length);
+
     for (let i = 0; i < req.files.length; i++) {
       const fileRes = await uploadFile(req.files[i]);
       if (typeof fileRes !== "string") {
@@ -64,6 +66,8 @@ export const createProductController = async (req: Request, res: Response) => {
       categories: categoryList,
       pictures: picturesUrl,
     });
+
+    console.log("Product Created");
 
     const productSaved = await productRepo.save(product);
 

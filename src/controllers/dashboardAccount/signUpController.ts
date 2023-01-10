@@ -24,10 +24,7 @@ export const dashboardSignUpController = async (
       },
     });
 
-    console.log(userAlreadyExists);
-    console.log(!!userAlreadyExists);
-
-    if (!userAlreadyExists) {
+    if (userAlreadyExists) {
       return res.status(409).json({ error: "User aldready exists" });
     }
 

@@ -44,7 +44,10 @@ export async function uploadFile(file: Express.Multer.File) {
 export async function deleteFile(id: string) {
   try {
     const auth = new google.auth.GoogleAuth({
-      keyFile: path.join(__dirname, "..", "config", "googledrive.json"),
+      credentials: {
+        private_key: process.env.GOOGLE_DRIVE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+        client_email: process.env.GOOGLE_DRIVE_CLIENT_EMAIL,
+      },
       scopes: "https://www.googleapis.com/auth/drive",
     });
 
